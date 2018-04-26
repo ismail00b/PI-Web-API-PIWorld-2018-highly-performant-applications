@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "UC2018TalkClient", "UC2018TalkClient\", "{9C542CE7-B9FA-423B-8ED4-807B1B36717F}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.2"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_29664"
+		Debug.AspNetCompiler.PhysicalPath = "UC2018TalkClient\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_29664\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_29664"
+		Release.AspNetCompiler.PhysicalPath = "UC2018TalkClient\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_29664\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "29664"
+		SlnRelativePath = "UC2018TalkClient\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C542CE7-B9FA-423B-8ED4-807B1B36717F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C542CE7-B9FA-423B-8ED4-807B1B36717F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78DC9877-4EBE-42AA-9B6E-35B049783F54}
+	EndGlobalSection
+EndGlobal

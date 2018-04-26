@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>PI Vision 3.1415926535897932384626433832795028841971693993751058...</title>
+    <link rel="stylesheet" href="index.html.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+    <meta charset='utf-16' />
+    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico">
+</head>
+
+<body>
+    <div id="page" class="page">
+        <div id="header" class="header">
+            <div id="header-left">
+                <img id="logo" src="images/osi_white.png" />
+            </div>
+            <div id="header-middle">
+                <!--Search box-->
+                <div id="element-picker" class="element-finder search">
+                    <img src="images/search.png" id="attribute-search-similar-button" class="search-icon">
+                    <input id="element-search" class="attribute-search search-form" placeholder="Element Search" />
+                    <div class="search-button">
+                        <div class="search-button-text noselect">Search</div>
+                    </div>
+                </div>
+                <div id="attribute-picker" class="attribute-finder search" style="display: none">
+                    <img src="images/search.png" id="attribute-search-similar-button" class="search-icon">
+                    <input id="attribute-search" class="attribute-search search-form" placeholder="Attribute Search" />
+                    <div class="search-button">
+                        <div class="search-button-text noselect">Search</div>
+                    </div>
+                </div>
+                <div id="eventframe-picker" class="element-finder search" style="display: none">
+                    <img src="images/search.png" id="attribute-search-similar-button" class="search-icon" />
+                    <input id="eventframe-search" class="attribute-search search-form" placeholder="EventFrame Search" />
+                    <div class="search-button">
+                        <div class="search-button-text noselect">Search</div>
+                    </div>
+                </div>
+            </div>
+            <div id="header-right">
+                <div id="eventframes-checkbox" class="header-right-button left noselect">Show EventFrames</div>
+                <div id="refresh-checkbox" class="header-right-button right noselect">Automatic Updates</div>
+            </div>
+        </div>
+        <div class="content" id="page-content">
+            <div id="left-panel">
+                <div id="left-panel-main">
+                    <!--Element twiddle + picker-->
+                    <div id="element-tab" class="selected tab accordion">Element<img class="arrow" src="images/down_arrow.png" /></div>
+                    <div id="element-panel" class="attribute-panel"></div>
+
+                    <!--Attribute twiddle + picker-->
+                    <div id="attribute-tab" class="tab accordion">Attribute<img class="arrow" src="images/down_arrow.png" /></div>
+                    <div id="attribute-panel" class="attribute-panel" style="display: none;"></div>
+
+                    <!--Eventframe twiddle + picker-->
+                    <div id="eventframe-tab" class="tab accordion">EventFrame<img class="arrow" src="images/down_arrow.png" /></div>
+                    <div id="eventframe-panel" class="attribute-panel"></div>
+                </div>
+                <div class="footer">
+                    2018 OSIsoft, LLC
+                </div>
+            </div>
+
+            <!--Graph-->
+            <div id="graph" class="graph-panel">
+                <svg/>
+                <div class="graph-panel-bottom-bar">
+                    Start Time: <input id="start-time" class="graph-input" type="text" placeholder="*-1d"/>
+                    End Time: <input id="end-time" class="graph-input" type="text" placeholder="*"/>
+                    Intervals: <input id="intervals" class="graph-input" type="text" placeholder="24"/>
+                    Max Count: <input id="max-count" class="graph-input" type="text" placeholder="150000" />
+                </div>
+            </div>
+
+            <div id="right-panel">
+                <!--Implementation selection-->
+                <div id="implementation-panel">
+                    <div id="impl-tabs">
+                        <div id="attribute-impl" class="selected impl noselect">Attribute</div>
+                        <div id="element-impl" class="impl noselect">Element</div>
+                        <div id="eventframe-impl" class="impl noselect">EventFrame</div>
+                        <div id="data-impl" class="impl noselect">Data</div>
+                    </div>
+
+                    <div id="attribute-implementation-picker" class="implementation-picker"></div>
+                    <div id="element-implementation-picker" class="implementation-picker" style="display: none;"></div>
+                    <div id="eventframe-implementation-picker" class="implementation-picker" style="display: none;"></div>
+                    <div id="data-implementation-picker" class="implementation-picker" style="display: none;"></div>
+                </div>
+                <div id="reexecute" class="noselect">Re-execute</div>
+
+                <!--History-->
+                <div id="history" class="history-panel"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/jquery-3.3.1.js"></script>
+    <script src="lib/d3.v4.min.js"></script>
+    <script src="js/implementations/sharedData.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/visuals.js"></script>
+    <script src="js/stopwatch.js"></script>
+    <script src="js/parameters.js"></script>
+    <script src="js/implementations/models.js"></script>
+    <script src="js/implementations/interfaces.js"></script>
+    <script src="js/implementations/attributeSearch/live.js"></script>
+    <script src="js/implementations/attributeSearch/old.js"></script>
+    <script src="js/implementations/attributeSearch/new.js"></script>
+    <script src="js/implementations/attributeSearch/similar.js"></script>
+    <script src="js/implementations/elementSearch/live.js"></script>
+    <script src="js/implementations/elementSearch/old.js"></script>
+    <script src="js/implementations/elementSearch/new.js"></script>
+    <script src="js/implementations/eventframeSearch/live.js"></script>
+    <script src="js/implementations/eventframeSearch/old.js"></script>
+    <script src="js/implementations/eventframeSearch/new.js"></script>
+    <script src="js/implementations/data/streamSetRecorded.js"></script>
+    <script src="js/implementations/data/live.js"></script>
+    <script src="js/implementations/data/streamRecorded.js"></script>
+    <script src="js/implementations/data/streamPlot.js"></script>
+    <script src="js/implementations/data/streamSetPlot.js"></script>
+    <script src="js/implementations/data/batch.js"></script>
+    <script src="js/implementations/data/channels.js"></script>
+    <script src="js/implementations/data/streamUpdates.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/registerEvents.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
