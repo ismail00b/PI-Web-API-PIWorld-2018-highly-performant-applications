@@ -19,7 +19,10 @@ directly from the [index.html](UC2018TalkClient/Client/index.html) once the repo
 Some information such as the server address, Web IDs of invariants (such as the AF Database, root
 element, various template names, etc.) are hard-coded in the
 [configuration object](UC2018TalkClient/Client/js/implementations/sharedData.js): these must be
-replaced with information applicable to your PI System.
+replaced with information applicable to your PI System. A full installation of the PI Web API 2018
+release is needed for full support of the features demonstrated by the application: On older
+versions, some features (such as the new AFSearch functionality, Stream Updates, and Channels) may
+not be available.
 
 ## Notes
 * The [implementations](UC2018TalkClient/Client/js/implementations) folder contains the files
