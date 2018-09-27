@@ -8,10 +8,11 @@ in the interest of providing the simplest possible data query implementations.
 ## Synopsis
 This repository contains the sample PI Web API client application used during the live-coding
 portions of the _Writing Highly Performant PI Web API Applications_ talk, given at PI World San
-Francisco 2018. The application is browser-based, and written in vanilla JavaScript. The
-application is designed to act as a performance showcase, with various implementations of PI Web
-API queries used to retrieve PI System data. Compatibility has been tested with Mozilla Firefox 59
-and Google Chrome 66. The application is provided as a Visual Studio solution for ease-of-use.
+Francisco 2018 and PI World EMEA 2018. The application is browser-based, and written in vanilla
+JavaScript. The application is designed to act as a performance showcase, with various
+implementations of PI Web API queries used to retrieve PI System data. Compatibility has been
+tested with Mozilla Firefox 59 and Google Chrome 66, but will likely work in other browsers. The
+application is provided as a Visual Studio solution for ease-of-use.
 
 ## Getting Started
 The application consists entirely of static resources, and so can be opened in a web browser
