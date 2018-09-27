@@ -58,7 +58,7 @@ class StreamUpdatesDataQuery extends IDataQuery {
         this.resultType = "Stream Update";
 
         // Turn our marker dictionary into an array.
-        let markers = Array.from(Object.values(this.markerDictionary).length);
+        let markers = Array.from(Object.values(this.markerDictionary));
 
         // Don't do anything if we have no markers.
         if (markers.length === 0) {
@@ -71,7 +71,7 @@ class StreamUpdatesDataQuery extends IDataQuery {
 
         // Add all the markers we collected to Parameters collection.
         let parameters = new Parameters();
-        this.markers.map(marker => parameters.append("marker", marker));
+        markers.map(marker => parameters.append("marker", marker));
 
         // GET the result - this is the changes (or lack thereof) since the time
         // that our marker was created.
@@ -117,7 +117,7 @@ class StreamUpdatesDataQuery extends IDataQuery {
         });
 
         // Execute a DataQuery to redraw the graph, so that our new attribute shows up on it.
-        return await this.DataQuery(config, selectedAttributes, false);
+        return await this.DataQuery(config, selectedAttributes, openedThread === -1);
     }
 
     // This function gets called whenever the user deselects an attribute.

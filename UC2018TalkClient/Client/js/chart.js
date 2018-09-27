@@ -127,9 +127,9 @@ var chart = (function () {
             // legend background
             legend.append("rect")
                 .attr("class", "legend-bg")
-                .attr("x", width - 150)
+                .attr("x", width - 180)
                 .attr("y", -10)
-                .attr("width", 220)
+                .attr("width", 250)
                 .attr("height", Math.max(100, traceData.length * 20 + 10))
                 .attr("stroke", "black")
                 .attr("fill", "white");
@@ -139,7 +139,7 @@ var chart = (function () {
                 .data(traceData)
                 .enter()
                 .append("rect")
-                .attr("x", width - 140)
+                .attr("x", width - 170)
                 .attr("y", function (d, i) { return i * 20; })
                 .attr("width", 10)
                 .attr("height", 10)
@@ -156,10 +156,15 @@ var chart = (function () {
                 .data(traceData)
                 .enter()
                 .append("text")
-                .attr("x", width - 127)
+                .attr("x", width - 157)
                 .attr("y", function (d, i) { return i * 20 + 10; })
                 .text(function (d) { return d.Name; });
         }
+    }
+
+    function clear() {
+        let chartElement = $("svg");
+        chartElement.empty();
     }
 
     function redraw() {
@@ -247,6 +252,7 @@ var chart = (function () {
         redraw: redraw,
         plotData: plotData,
         updateData: updateData,
-        removeTrace: removeTrace
+        removeTrace: removeTrace,
+        clear: clear
     };
 })();

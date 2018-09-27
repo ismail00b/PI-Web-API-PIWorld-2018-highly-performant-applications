@@ -4,7 +4,6 @@ class ChannelDataQuery extends IDataQuery {
     constructor() {
         super();
         this.needsPolling = false;
-        this.resultType = "Single Call";
     }
 
     async DataQuery(config, selectedAttributes) {
@@ -40,8 +39,8 @@ class ChannelDataQuery extends IDataQuery {
 
                 // Set up the WebSocket so that we log a message when it opens, and updates the graph.
                 webSocket.onmessage = function (event) {
-                    // Housekeeping - let the rest of the application know we're switching to WebSocket mode.
-                    this.resultType = "Channel";
+                    // Housekeeping - let the rest of the application know we're switching to Channels mode.
+                    currentDataImplementation.resultType = "Channel";
 
                     console.log("New data for:\n" + webId);
 
@@ -60,6 +59,8 @@ class ChannelDataQuery extends IDataQuery {
         // We need to do this _after_ we open the WebSockets, because otherwise we might miss some data.
         let streamSetQuery = new StreamSetsPlotDataQuery();
         let results = await streamSetQuery.DataQuery(config, selectedAttributes);
+
+        this.resultType = "Single Call";
         return results;
     }
 

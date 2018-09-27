@@ -11,9 +11,11 @@ var AsyncForEach = (collection, callback) => Promise.all(collection.map(callback
 
 class Config {
     constructor() {
-        this.databaseWebId = "F1RDDqD5loBNH0erqeqJodtALAf2V-9YjZ1kCXy4n-cI2xfQUkVTVFVOSVRcUElXT1JMRDIwMTg";
+        // Replace the databaseWebId and rootElementWebId variables with the Web IDs for your database and root element.
+        this.databaseWebId = "F1RDdWzytWZcXEuey30pa60F1AGfH696mdRUKiwGHx2Rn6-wUElXT1JMRFRBTEtERU1PXFBJV09STEQyMDE4";
+        this.rootElementWebId = "F1EmdWzytWZcXEuey30pa60F1AH0ZTgoor6BGeHgANOjrcOwUElXT1JMRFRBTEtERU1PXFBJV09STEQyMDE4XEZMRUVU";
+
         this.rootElementName = "Fleet";
-        this.rootElementWebId = "F1EmDqD5loBNH0erqeqJodtALAbHNRrfwb6BGXZLgIz0QpeAUkVTVFVOSVRcUElXT1JMRDIwMThcRkxFRVQ";
         this.carTemplateName = "Fleet Car Template";
         this.efTemplateName = "Running Event";
         this.host = "localhost";
@@ -32,9 +34,13 @@ class Config {
     }
 }
 
-var openWebsockets = {};
+var openWebsockets = [];
 
 var openedThread = -1;
+
+var pollingInterval = -1;
+
+var updatesRunning = false;
 
 var events = [];
 

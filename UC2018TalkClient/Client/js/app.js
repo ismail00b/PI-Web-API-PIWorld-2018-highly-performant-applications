@@ -47,10 +47,6 @@ async function GetData(added, attributeDTO) {
 
     if (added === undefined && attributeDTO === undefined) {
         timer.startOrContinue();
-        //response = await currentDataImplementation.HandleAttributeAddition(
-        //    config,
-        //    attributeDTO,
-        //    selectedAttributes);
         response = await currentDataImplementation.DataQuery(config, selectedAttributes);
         timer.pause(stopwatch_dataQuery_key);
     }
@@ -71,7 +67,7 @@ async function GetData(added, attributeDTO) {
         timer.pause(stopwatch_dataQuery_key);
     }
 
-    if (!$("#refresh-checkbox").hasClass("selected")) {
+    if (!updatesRunning) {
         if (openedThread !== -1) {
             console.log("Automatic updates aren't enabled; cancel the update thread.");
             clearInterval(openedThread);

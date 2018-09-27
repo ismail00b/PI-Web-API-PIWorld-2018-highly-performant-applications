@@ -1,5 +1,10 @@
 ﻿"use strict";
 
+// This StreamUpdates implementation makes use of the fact that re-registering for a
+// resource which is already being monitored is very cheap to do, because the cache
+// on the server already exists. By abusing this, and the knowledge that the marker will
+// only change when an update occurs for the resource, we can continually re-register
+// every time the DataQuery is called by the default polling logic.
 class StreamUpdatesDataQuery extends IDataQuery {
     constructor() {
         super();

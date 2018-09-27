@@ -1,10 +1,71 @@
 ﻿"use strict";
 
+function stopAutomaticUpdates() {
+    if (pollingInterval !== -1) {
+        clearInterval(pollingInterval);
+    }
+    if (openedThread !== -1) {
+        clearInterval(openedThread);
+    }
+
+    Object.values(openWebsockets).map(socket => {
+        socket.close();
+    });
+    openWebsockets = [];
+
+    let retVal = updatesRunning;
+    updatesRunning = false;
+
+    return retVal;
+}
+
+function startAutomaticUpdates(triggerDataCall) {
+    let config = new Config();
+
+    if (currentDataImplementation.needsPolling) {
+        pollingInterval = setInterval(
+            () => {
+                currentDataImplementation
+                    .DataQuery(config, selectedAttributes)
+                    .then(result => DrawGraph(TransformData(currentDataImplementation.resultType, result)));
+            },
+            config.updatePeriod);
+    }
+
+    if (triggerDataCall) {
+        currentDataImplementation
+            .DataQuery(config, selectedAttributes)
+            .then(result => DrawGraph(TransformData(currentDataImplementation.resultType, result)));
+    }
+
+    updatesRunning = true;
+}
+
 $(document.body).ready(() => {
 
     if (localStorage["history"]) {
         $("#history").html(localStorage["history"]);
     }
+
+    if (localStorage["start-time"]) {
+        $("#start-time").val(localStorage["start-time"]);
+    }
+
+    if (localStorage["end-time"]) {
+        $("#end-time").val(localStorage["end-time"]);
+    }
+
+    if (localStorage["intervals"]) {
+        $("#intervals").val(localStorage["intervals"]);
+    }
+
+    if (localStorage["max-count"]) {
+        $("#max-count").val(localStorage["max-count"]);
+    }
+
+    $(".graph-input").on('input', function (event) {
+        localStorage[event.target.id] = $(event.target).val();
+    });
 
     $(".accordion").on("click", function (event) {
         $(".attribute-panel:not('#" + $(this).attr("id").split("-")[0] + "-panel')").slideUp("ease");
@@ -23,6 +84,7 @@ $(document.body).ready(() => {
             hideSearch();
         }
     });
+
     $("#element-picker").keypress(event => {
         if (event.originalEvent.code === "Enter") {
             ElementSearch();
@@ -46,33 +108,13 @@ $(document.body).ready(() => {
         chart.redraw();
     });
 
-    let pollingInterval = -1;
-
     $("#refresh-checkbox").click(event => {
         $(event.target).toggleClass("selected");
-        if ($(event.target).hasClass("selected")) {if (currentDataImplementation.needsPolling) {
-                let config = new Config();
 
-                pollingInterval = setInterval(
-                    () => {
-                        currentDataImplementation
-                            .DataQuery(config, selectedAttributes)
-                            .then(result => DrawGraph(TransformData(currentDataImplementation.resultType, result)));
-                    },
-                    config.updatePeriod);
-            }
-        }
-        else {
-            if (pollingInterval !== -1) {
-                clearInterval(pollingInterval);
-            }
-            if (openedThread !== -1) {
-                clearInterval(openedThread);
-            }
-            Object.values(openWebsockets).map(socket => {
-                socket.close();
-            });
-            openWebsockets = [];
+        stopAutomaticUpdates();
+
+        if ($(event.target).hasClass("selected")) {
+            startAutomaticUpdates(true);
         }
     });
 
@@ -82,6 +124,14 @@ $(document.body).ready(() => {
         }
 
         await GetData();
+    });
+
+    $("#clear-history").click(async event => {
+        localStorage.removeItem("history");
+        ClearHistoryPanel();
+        ClearChart();
+        stopAutomaticUpdates();
+        $("#refresh-checkbox").removeClass("selected");
     });
 
     $("#element-search-button").click(() => {

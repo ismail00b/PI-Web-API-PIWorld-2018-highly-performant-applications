@@ -9,8 +9,8 @@ class LiveDataQuery extends IDataQuery {
     async DataQuery(config, selectedAttributes) {
         // This method just controls which underlying implementation we call.
 
-        //let results = await this.streamRecorded(config, selectedAttributes);
-        let results = await this.streamPlot(config, selectedAttributes);
+        let results = await this.streamRecorded(config, selectedAttributes);
+        //let results = await this.streamPlot(config, selectedAttributes);
         //let results = await this.streamSetPlot(config, selectedAttributes);
         //let results = await this.batch(config, selectedAttributes);
 
@@ -27,17 +27,17 @@ class LiveDataQuery extends IDataQuery {
         let maxCount = config.maxCount;
 
         let parameters = new Parameters();
-        parameters.set("startTime", startTime);
-        parameters.set("endTime", endTime);
-        parameters.set("maxCount", maxCount);
+        //parameters.set("startTime", startTime);
+        //parameters.set("endTime", endTime);
+        //parameters.set("maxCount", maxCount);
 
         let results = await AsyncForEach(
             selectedAttributes,
             async attributeDTO => {
                 let webId = attributeDTO.webId;
-                let url = `${piwebapi}/streams/${webId}/recorded`;
+                //let url = `${piwebapi}/streams/${webId}/recorded`;
 
-                return await Get(url + parameters, true);
+                //return await Get(url + parameters, true);
             });
 
         return results;
@@ -57,7 +57,7 @@ class LiveDataQuery extends IDataQuery {
         parameters.set("startTime", startTime);
         parameters.set("endTime", endTime);
         parameters.set("maxCount", maxCount);
-        parameters.set("intervals", intervals);
+        //parameters.set("intervals", intervals);
 
         let results = await AsyncForEach(
             selectedAttributes,

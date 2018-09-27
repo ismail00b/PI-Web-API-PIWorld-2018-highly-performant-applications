@@ -245,7 +245,6 @@ svg {
     color:#696969;
 }
 
-
 #implementation-panel{
     min-height:306px;
     border-bottom:solid 1px #ddd;
@@ -310,7 +309,7 @@ svg {
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
-#reexecute {
+.history-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -326,11 +325,11 @@ svg {
     box-shadow: 3px 4px 8px -3px rgba(17, 17, 17, .3);
 }
 
-#reexecute:active {
-    box-shadow:none;
+.history-button:active {
+    box-shadow: none;
 }
 
-#reexecute:hover{
+.history-button:hover{
     opacity:.8;
 }
 
@@ -453,7 +452,7 @@ form > label{
 
 .history-panel {
     position: relative;
-    max-height: calc(100% - 360px);
+    max-height: calc(100% - 397px);
     overflow: auto;
 }
 

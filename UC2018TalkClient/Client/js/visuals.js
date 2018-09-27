@@ -29,15 +29,7 @@ function DeselectElement(elementDTO) {
     let attributePanel = $("#attribute-panel");
     attributePanel.empty();
 
-    Object.values(openWebsockets).map(socket => {
-        socket.close();
-    });
-    openWebsockets = {};
-
-    if (openedThread !== -1) {
-        clearInterval(openedThread);
-        openedThread = -1;
-    }
+    stopAutomaticUpdates();
 }
 
 function CreateElement(elementDTO) {
@@ -116,8 +108,6 @@ function CreateSelectAll(attributeDTOs) {
 
     return container;
 }
-
-
 
 function CreateDeSelectAll() {
     let container = document.createElement("div");
@@ -214,6 +204,17 @@ function CreateStopwatchTimestamp(timeMs) {
     localStorage["history"] = history.html();
 }
 
+function ClearChart() {
+    chart.clear();
+}
+
+function ClearHistoryPanel() {
+    $("#history").empty();
+    Object.keys(implementationHistory.lastImpl).map(impl => {
+        implementationHistory.lastImpl[impl] = undefined;
+    });
+}
+
 function SelectRadioButtons(selected) {
     $.each($(selected).parent().find("label"), (i, x) => { $(x).children()[0].checked = selected.id === x.id; });
 }
@@ -242,18 +243,18 @@ function AddImplementationOption(type, id, name, callback) {
         implementationHistory.currentImpl[type] = name;
         localStorage[type + "-impl"] = name;
         $(selected).addClass("selected");
+
+        let reenableUpdates = false;
         if (type === "data") {
-            Object.values(openWebsockets).map(function (ws) {
-                ws.close();
-            });
-            openWebsockets = {};
-            if (openedThread !== -1) {
-                clearInterval(openedThread);
-                openedThread = -1;
-            }
+            reenableUpdates = stopAutomaticUpdates();
         }
+
         callback(name);
-        if (type === "data") {
+
+        if (reenableUpdates) {
+            startAutomaticUpdates(type === "data");
+        }
+        else if (type === "data") {
             if (selectedAttributes.length > 0) {
                 GetData();
             }
